@@ -1,0 +1,36 @@
+version: '3.8'  # Chọn phiên bản Docker Compose
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin_password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/var/lib/mongodb/data
+    networks:
+      - mynetwork
+    restart: always
+
+  sql_server:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: sql_server_container
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: "Phu@1234"  # Mật khẩu SA
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/lib/sqlserver/data
+    networks:
+      - mynetwork
+
+networks: 
+  mynetwork:
+    driver: bridge
+volumes:
+  mongo-data:
+  sqlserver-data:
