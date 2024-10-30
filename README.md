@@ -25,3 +25,6 @@ docker exec -it sql_server_container /opt/mssql-tools/bin/sqlcmd -S localhost -U
 docker-compose up -d
 
 
+#### INIT GIT REPO ####
+
+#### CREATE Solution ####
