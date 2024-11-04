@@ -6,4 +6,29 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Commands\" />
+    <None Remove="Queries\" />
+    <None Remove="DomainEventHandles\" />
+    <None Remove="Mapping\" />
+    <None Remove="Commands\StartExam\" />
+    <None Remove="Queries\GetHomeExamList\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Queries\" />
+    <Folder Include="DomainEventHandles\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Commands\StartExam\" />
+    <Folder Include="Queries\GetHomeExamList\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="MongoDB.Driver" Version="3.0.0" />
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Examination.Domain\Examination.Domain.csproj" />
+  </ItemGroup>
 </Project>
