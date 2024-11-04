@@ -6,4 +6,33 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="AggregateModels\" />
+    <None Remove="Events\" />
+    <None Remove="SeedWork\" />
+    <None Remove="Exceptions\" />
+    <None Remove="AggregateModels\Category\" />
+    <None Remove="AggregateModels\Question\" />
+    <None Remove="AggregateModels\User\" />
+    <None Remove="AggregateModels\ExamResult\" />
+    <None Remove="AggregateModels\Exam\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AggregateModels\" />
+    <Folder Include="Events\" />
+    <Folder Include="SeedWork\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="AggregateModels\Category\" />
+    <Folder Include="AggregateModels\Question\" />
+    <Folder Include="AggregateModels\User\" />
+    <Folder Include="AggregateModels\ExamResult\" />
+    <Folder Include="AggregateModels\Exam\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="MongoDB.Bson" Version="3.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\Examation.Dtos\Examation.Dtos.csproj" />
+  </ItemGroup>
 </Project>

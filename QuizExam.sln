@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examination.Domain.UnitTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examination.Application.UnitTests", "test\Examination\Examination.Application.UnitTests\Examination.Application.UnitTests.csproj", "{A4696A74-46F5-4E67-9CB6-5D641D39520D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examation.Dtos", "src\BuildingBlocks\Examation.Dtos\Examation.Dtos.csproj", "{C3F904AE-7CAA-4EA4-BF67-C31C12588D07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{A4696A74-46F5-4E67-9CB6-5D641D39520D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4696A74-46F5-4E67-9CB6-5D641D39520D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4696A74-46F5-4E67-9CB6-5D641D39520D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3F904AE-7CAA-4EA4-BF67-C31C12588D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3F904AE-7CAA-4EA4-BF67-C31C12588D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3F904AE-7CAA-4EA4-BF67-C31C12588D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3F904AE-7CAA-4EA4-BF67-C31C12588D07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CD1451C9-D89A-418F-9B79-6C70B40F37EE} = {183A040F-79FF-4EF8-B1C1-37276A16E395}
@@ -90,5 +96,6 @@ Global
 		{3EEAC53B-F7FC-4D05-9759-26CDA1B60FB8} = {82FA1C29-B8A5-46BA-8EAB-642269039256}
 		{4BE77F95-B23E-49B5-A046-55E374CC269A} = {82FA1C29-B8A5-46BA-8EAB-642269039256}
 		{A4696A74-46F5-4E67-9CB6-5D641D39520D} = {82FA1C29-B8A5-46BA-8EAB-642269039256}
+		{C3F904AE-7CAA-4EA4-BF67-C31C12588D07} = {183A040F-79FF-4EF8-B1C1-37276A16E395}
 	EndGlobalSection
 EndGlobal
