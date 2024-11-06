@@ -1,4 +1,8 @@
-
+## APPLICATION LIST URL ##
+- Identity: https://localhost:5001
+- Exam API: http://localhost:5002
+- Exam Admin: http://localhost:6001
+- Exam portal: http://localhost:6002
 
 ## Docker command run Databases
 

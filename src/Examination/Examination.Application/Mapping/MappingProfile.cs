@@ -2,6 +2,7 @@
 using Examination.Domain.AggregateModels.ExamAggregate;
 using Examination.Dtos;
 
+
 namespace Examination.Application.Mapping
 {
     public class MappingProfile : Profile
