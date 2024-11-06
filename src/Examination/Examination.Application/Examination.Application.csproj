@@ -11,16 +11,24 @@
     <None Remove="Queries\" />
     <None Remove="DomainEventHandles\" />
     <None Remove="Mapping\" />
-    <None Remove="Commands\StartExam\" />
-    <None Remove="Queries\GetHomeExamList\" />
+    <None Remove="Commands\V1\" />
+    <None Remove="Commands\V1\StartExam\" />
+    <None Remove="DomainEventHandles\V1\" />
+    <None Remove="Queries\V1\" />
+    <None Remove="Queries\V1\GetHomeExamList\" />
+    <None Remove="Mapping\V1\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Queries\" />
     <Folder Include="DomainEventHandles\" />
     <Folder Include="Mapping\" />
-    <Folder Include="Commands\StartExam\" />
-    <Folder Include="Queries\GetHomeExamList\" />
+    <Folder Include="Commands\V1\" />
+    <Folder Include="Commands\V1\StartExam\" />
+    <Folder Include="DomainEventHandles\V1\" />
+    <Folder Include="Queries\V1\" />
+    <Folder Include="Queries\V1\GetHomeExamList\" />
+    <Folder Include="Mapping\V1\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.1" />

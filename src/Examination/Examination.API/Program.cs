@@ -21,6 +21,7 @@ namespace Examination.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseSerilog();
                 });
     }
 }

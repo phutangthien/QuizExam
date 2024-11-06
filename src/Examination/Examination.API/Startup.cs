@@ -36,6 +36,22 @@ namespace Examination.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+            });
+            services.AddVersionedApiExplorer(
+                          options =>
+                          {
+                              // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service
+                              // note: the specified format code will format the version as "'v'major[.minor][-status]"
+                              options.GroupNameFormat = "'v'VVV";
+
+                              // note: this option is only necessary when versioning by url segment. the SubstitutionFormat
+                              // can also be used to control the format of the API version in route templates
+                              options.SubstituteApiVersionInUrl = true;
+                          });
+
             services.AddSingleton<IMongoClient>(c =>
             {
                 var user = Configuration.GetValue<string>("DatabaseSettings:User");
@@ -46,10 +62,6 @@ namespace Examination.API
                     "mongodb://" + user + ":" + password + "@" + server + "/" + databaseName + "?authSource=admin");
             });
             services.AddScoped(c => c.GetService<IMongoClient>()?.StartSession());
-            //services.AddAutoMapper(cfg =>
-            //{
-            //    cfg.AddProfile<MappingProfile>();
-            //});
 
             #region Config AutoMapper
             // Auto Mapper Configurations
@@ -78,7 +90,8 @@ namespace Examination.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Examination.API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Examination.API V1", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "Examination.API V2", Version = "v2" });
             });
             services.Configure<ExamSettings>(Configuration);
 
@@ -95,7 +108,11 @@ namespace Examination.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Examination.API v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Examination.API v1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "Examination.API v2");
+                });
             }
 
             app.UseHttpsRedirection();
