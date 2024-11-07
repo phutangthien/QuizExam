@@ -6,6 +6,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
+using Examination.Infrastructure;
+using Microsoft.Extensions.Options;
+using Examination.Infrastructure.SeedWork;
+using MongoDB.Driver;
 
 namespace Examination.API
 {
@@ -21,9 +25,22 @@ namespace Examination.API
             {
                 Log.Information("Starting web host ({ApplicationContext})...", appName);
 
-                var host = CreateHostBuilder(args).Build();
+                var host = CreateHostBuilder(configuration, args).Build();
 
                 Log.Information("Apply configuration web host ({ApplicationContext})...", appName);
+
+                #region Seeding data to mongodb
+                using (var scope = host.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    var logger = services.GetRequiredService<ILogger<ExamMongoDbSeeding>>();
+                    var settings = services.GetRequiredService<IOptions<ExamSettings>>();
+                    var mongoClient = services.GetRequiredService<IMongoClient>();
+                    new ExamMongoDbSeeding()
+                        .SeedAsync(mongoClient, settings, logger)
+                        .Wait();
+                }
+                #endregion
 
                 host.Run();
 
@@ -63,11 +80,14 @@ namespace Examination.API
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHostBuilder CreateHostBuilder(IConfiguration configuration, string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.CaptureStartupErrors(false);
+                    webBuilder.ConfigureAppConfiguration(x => x.AddConfiguration(configuration));
+
                     webBuilder.UseStartup<Startup>();
                 });
     }
