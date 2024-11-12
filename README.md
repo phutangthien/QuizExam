@@ -32,3 +32,7 @@ docker-compose up -d
 #### INIT GIT REPO ####
 
 #### CREATE Solution ####
+
+
+#### IMPLEMENT QUICKSTART UI FOR IDENTITY API ####
+https://github.com/IdentityServer/IdentityServer4.Quickstart.UI

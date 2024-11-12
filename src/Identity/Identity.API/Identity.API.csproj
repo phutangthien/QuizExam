@@ -46,6 +46,14 @@
     <None Remove="Configuration\" />
     <None Remove="Factories\" />
     <None Remove="Extensions\" />
+    <None Remove="Controllers\" />
+    <None Remove="Models\Account\" />
+    <None Remove="Models\Consent\" />
+    <None Remove="Models\Device\" />
+    <None Remove="Models\Diagnostics\" />
+    <None Remove="Models\Grants\" />
+    <None Remove="Models\Home\" />
+    <None Remove="Attributes\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Database\" />
@@ -55,5 +63,13 @@
     <Folder Include="Configuration\" />
     <Folder Include="Factories\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\Account\" />
+    <Folder Include="Models\Consent\" />
+    <Folder Include="Models\Device\" />
+    <Folder Include="Models\Diagnostics\" />
+    <Folder Include="Models\Grants\" />
+    <Folder Include="Models\Home\" />
+    <Folder Include="Attributes\" />
   </ItemGroup>
 </Project>
