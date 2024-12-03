@@ -85,10 +85,11 @@ namespace Identity.API
             Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
             {
                 return new LoggerConfiguration()
-                    .MinimumLevel.Verbose()
+                    .MinimumLevel.Information()
                     .Enrich.WithProperty("ApplicationContext", appName)
                     .Enrich.FromLogContext()
                     .WriteTo.Console()
+                    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day, shared: true)
                     .ReadFrom.Configuration(configuration)
                     .CreateLogger();
             }

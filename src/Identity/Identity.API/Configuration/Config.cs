@@ -116,7 +116,7 @@ namespace Identity.API.Configuration
 
                     RedirectUris = { $"{clientUrls["ExamApi"]}/swagger/oauth2-redirect.html" },
                     PostLogoutRedirectUris = { $"{clientUrls["ExamApi"]}/swagger/" },
-
+                    
                     AllowedScopes =
                         {
                             "full_access",

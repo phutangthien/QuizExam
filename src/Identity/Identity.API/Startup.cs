@@ -116,7 +116,6 @@ namespace Identity.API
                 opt.AddHealthCheckEndpoint("Identity API", "/hc"); //map health check api
             }).AddSqlServerStorage(connectionString);
 
-
             //services.AddHealthChecksUI(opt =>
             //{
             //    opt.SetEvaluationTimeInSeconds(15); //time in seconds between check

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Identity.API.Configuration;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Entities;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Identity.API.Database
 {
@@ -28,7 +30,45 @@ namespace Identity.API.Database
             {
                 foreach (var client in Config.GetClients(clientUrls))
                 {
-                    context.Clients.Add(client.ToEntity());
+                    var entity = new IdentityServer4.EntityFramework.Entities.Client
+                    {
+                        ClientId = client.ClientId,
+                        ClientName = client.ClientName,
+                        ClientSecrets = client.ClientSecrets.Select(s => new IdentityServer4.EntityFramework.Entities.ClientSecret
+                        {
+                            Value = s.Value
+                        }).ToList(),
+                        RedirectUris = client.RedirectUris.Select(uri => new IdentityServer4.EntityFramework.Entities.ClientRedirectUri
+                        {
+                            RedirectUri = uri
+                        }).ToList(),
+                        PostLogoutRedirectUris = client.PostLogoutRedirectUris.Select(uri => new IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri
+                        {
+                            PostLogoutRedirectUri = uri
+                        }).ToList(),
+                        AllowedScopes = client.AllowedScopes.Select(scope => new IdentityServer4.EntityFramework.Entities.ClientScope
+                        {
+                            Scope = scope
+                        }).ToList(),
+                        AllowedGrantTypes = client.AllowedGrantTypes.Select(grantType => new IdentityServer4.EntityFramework.Entities.ClientGrantType
+                        {
+                            GrantType = grantType
+                        }).ToList(),
+                        AllowedCorsOrigins = client.AllowedCorsOrigins.Select(origin => new IdentityServer4.EntityFramework.Entities.ClientCorsOrigin
+                        {
+                            Origin = origin
+                        }).ToList(),
+                        AccessTokenLifetime = client.AccessTokenLifetime,
+                        IdentityTokenLifetime = client.IdentityTokenLifetime,
+                        RequireClientSecret = client.RequireClientSecret,
+                        RequireConsent = client.RequireConsent,
+                        AllowOfflineAccess = client.AllowOfflineAccess,
+                        AlwaysIncludeUserClaimsInIdToken = client.AlwaysIncludeUserClaimsInIdToken,
+                        AllowAccessTokensViaBrowser = client.AllowAccessTokensViaBrowser,
+                    };
+
+                    context.Clients.Add(entity);
+
                 }
                 await context.SaveChangesAsync();
             }
@@ -49,12 +89,28 @@ namespace Identity.API.Database
                     await context.SaveChangesAsync();
                 }
             }
-
+            
             if (!context.IdentityResources.Any())
             {
                 foreach (var resource in Config.GetIdentityResources())
                 {
-                    context.IdentityResources.Add(resource.ToEntity());
+                    try
+                    {
+                        var entity = new IdentityServer4.EntityFramework.Entities.IdentityResource
+                        {
+                            Name = resource.Name,
+                            DisplayName = resource.DisplayName,
+                            Description = resource.Description,
+                            Emphasize = resource.Emphasize,
+                            Enabled = resource.Enabled,
+                            Required = resource.Required,
+                            ShowInDiscoveryDocument = resource.ShowInDiscoveryDocument
+                        };
+                        context.IdentityResources.Add(entity);
+                    }catch(Exception ex)
+                    {
+                        string exm = ex.Message;
+                    }
                 }
                 await context.SaveChangesAsync();
             }
@@ -63,7 +119,15 @@ namespace Identity.API.Database
             {
                 foreach (var api in Config.GetApis())
                 {
-                    context.ApiResources.Add(api.ToEntity());
+                    var entity = new IdentityServer4.EntityFramework.Entities.ApiResource
+                    {
+                        AllowedAccessTokenSigningAlgorithms = api.AllowedAccessTokenSigningAlgorithms.FirstOrDefault(),
+                        DisplayName = api.DisplayName,
+                        Enabled = api.Enabled,
+                        Name = api.Name,
+                        ShowInDiscoveryDocument = api.ShowInDiscoveryDocument,
+                    };
+                    context.ApiResources.Add(entity);
                 }
 
                 await context.SaveChangesAsync();
@@ -73,7 +137,17 @@ namespace Identity.API.Database
             {
                 foreach (var resource in Config.GetApiScopes())
                 {
-                    context.ApiScopes.Add(resource.ToEntity());
+                    var entity = new IdentityServer4.EntityFramework.Entities.ApiScope
+                    {
+                        DisplayName = resource.DisplayName,
+                        Description = resource.Description,
+                        Emphasize = resource.Emphasize,
+                        Enabled = resource.Enabled,
+                        Name = resource.Name,
+                        Required = resource.Required,
+                        ShowInDiscoveryDocument = resource.ShowInDiscoveryDocument
+                    };
+                    context.ApiScopes.Add(entity);
                 }
                 await context.SaveChangesAsync();
             }
